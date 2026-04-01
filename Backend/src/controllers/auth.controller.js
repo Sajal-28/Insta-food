@@ -4,20 +4,20 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 async function registerUser(req, res) {
-    
-    const {fullName, email, password} = req.body;
+
+    const { fullName, email, password } = req.body;
 
     const isUserAlreadyExists = await userModel.findOne({
         email
     })
 
-    if(isUserAlreadyExists){
+    if (isUserAlreadyExists) {
         return res.status(400).json({
             message: "User Already Exists"
         })
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)  
+    const hashedPassword = await bcrypt.hash(password, 10)
 
     const user = await userModel.create({
         fullName,
@@ -29,27 +29,31 @@ async function registerUser(req, res) {
         id: user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+    });
 
     res.status(201).json({
         message: "User Registered Successfully",
-        user : {
+        user: {
             id: user._id,
             fullName: user.fullName,
-            email : user.email
+            email: user.email
         }
     })
 }
 
 async function loginUser(req, res) {
-    
+
     const { email, password } = req.body;
 
     const user = await userModel.findOne({
         email
     })
 
-    if(!user){
+    if (!user) {
         return res.status(400).json({
             message: "Invalid Email or Password"
         })
@@ -57,7 +61,7 @@ async function loginUser(req, res) {
 
     const isPasswordValid = await bcrypt.compare(password, user.password)
 
-    if(!isPasswordValid){
+    if (!isPasswordValid) {
         return res.status(400).json({
             message: "Invalid Email or Password"
         })
@@ -67,11 +71,15 @@ async function loginUser(req, res) {
         id: user._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+    });
 
     res.status(200).json({
         message: "user logged in successfully",
-        user : {
+        user: {
             id: user._id,
             fullName: user.fullName,
             email: user.email,
@@ -88,13 +96,13 @@ function logoutUser(req, res) {
 }
 
 async function registerFoodPartner(req, res) {
-    const {name, email, password, phone, address, contactName} = req.body;
+    const { name, email, password, phone, address, contactName } = req.body;
 
     const isAccountAlreadyExists = await foodPartnerModel.findOne({
         email
     })
 
-    if(isAccountAlreadyExists){
+    if (isAccountAlreadyExists) {
         return res.status(400).json({
             message: "Food Partner Account Already Exists"
         })
@@ -115,7 +123,11 @@ async function registerFoodPartner(req, res) {
         id: foodPartner._id
     }, process.env.JWT_SECRET);
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+    });
 
     res.status(201).json({
         message: "Food partner Created Successfully",
@@ -135,7 +147,7 @@ async function loginFoodPartner(req, res) {
         email
     })
 
-    if(!foodPartner){
+    if (!foodPartner) {
         return res.status(400).json({
             message: "Invalid Email or Password"
         })
@@ -143,7 +155,7 @@ async function loginFoodPartner(req, res) {
 
     const isPasswordValid = await bcrypt.compare(password, foodPartner.password)
 
-    if(!isPasswordValid){
+    if (!isPasswordValid) {
         return res.status(400).json({
             message: "Invalid Email or Password"
         })
@@ -153,11 +165,15 @@ async function loginFoodPartner(req, res) {
         id: foodPartner._id
     }, process.env.JWT_SECRET)
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+    });
 
     res.status(200).json({
         message: "Food Partner logged in successfully",
-        user : {
+        user: {
             id: foodPartner._id,
             name: foodPartner.name,
             email: foodPartner.email,
