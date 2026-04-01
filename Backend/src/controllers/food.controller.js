@@ -35,8 +35,9 @@ async function getFoodItems(req, res) {
     })
 }
 
-async function likeFoodController(req, res) {
+async function likeFood(req, res) {
     const { foodId } = req.body
+    const user = req.user;
 
     const isAlreadyLiked = await likeModel.findOne({
         user: user._id,
@@ -73,8 +74,9 @@ async function likeFoodController(req, res) {
     })
 }
 
-async function saveFoodController(req, res) {
+async function saveFood(req, res) {
     const { foodId } = req.body
+    const user = req.user;
 
     const isAlreadySaved = await saveModel.findOne({
         user: user._id,
@@ -128,4 +130,4 @@ async function getSavedFood(req, res) {
     })
 }
 
-module.exports = { createFood, getFoodItems, likeFoodController, saveFoodController, getSavedFood } 
+module.exports = { createFood, getFoodItems, likeFood, saveFood, getSavedFood } 
