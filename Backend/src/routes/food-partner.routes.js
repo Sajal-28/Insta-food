@@ -6,4 +6,4 @@ const router = express.Router();
 
 router.get("/:id", authMiddleware.authUserMiddleware, foodPartnerController.getFoodPartnerById)
 
-module.exports = { router }
+module.exports = router
