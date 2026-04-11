@@ -25,7 +25,7 @@ const UserRoute = ({ children }) => {
     }
 
     if (isFoodPartnerSession()) {
-        return <Navigate to="/create-food" replace />;
+        return children;
     }
 
     return <Navigate to="/user/login" replace />;

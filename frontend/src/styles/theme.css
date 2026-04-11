@@ -6,9 +6,9 @@
   --color-border: rgba(91, 69, 58, 0.14);
   --color-text: #1b1612;
   --color-text-secondary: #6a5549;
-  --color-accent: #e8623a;
-  --color-accent-strong: #c44925;
-  --color-accent-hover: #f07a52;
+  --color-accent: #e1034d;
+  --color-accent-strong: #b8003a;
+  --color-accent-hover: #ff1159;
   --color-danger: #dc2626;
 
   --radius-xs: 2px;
@@ -39,9 +39,9 @@
     --color-border: rgba(255, 238, 230, 0.1);
     --color-text: #fff7f0;
     --color-text-secondary: #d1b7a6;
-    --color-accent: #ff8c61;
-    --color-accent-strong: #f46e3c;
-    --color-accent-hover: #ff9c76;
+    --color-accent: #ff1159;
+    --color-accent-strong: #e1034d;
+    --color-accent-hover: #ff5a7e;
     --color-danger: #f87171;
     --shadow-sm: 0 10px 24px rgba(0,0,0,.3);
     --shadow-md: 0 24px 60px rgba(0,0,0,.36);
@@ -59,8 +59,8 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.4;
   background-image:
-    radial-gradient(circle at top left, rgba(232, 98, 58, 0.12), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(255, 201, 134, 0.1), transparent 22%);
+    radial-gradient(circle at top left, rgba(225, 3, 77, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(225, 3, 77, 0.1), transparent 22%);
   background-attachment: fixed;
 }
 
