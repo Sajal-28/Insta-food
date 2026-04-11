@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { setSessionRole } from '../../utils/session';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const FoodPartnerLogin = () => {
@@ -21,6 +22,9 @@ const FoodPartnerLogin = () => {
 
     console.log(response.data);
 
+    setSessionRole('foodPartner', {
+      foodPartnerId: response.data?.user?.id
+    });
     navigate("/create-food"); // Redirect to create food page after login
 
   };

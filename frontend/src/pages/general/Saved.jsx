@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/reels.css'
 import axios from 'axios'
 import ReelFeed from '../../components/ReelFeed'
+import { useNavigate } from 'react-router-dom'
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Saved = () => {
     const [ videos, setVideos ] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get(`${API_URL}/api/food/save`, { withCredentials: true })
@@ -21,7 +23,10 @@ const Saved = () => {
                 }))
                 setVideos(savedFoods)
             })
-    }, [])
+            .catch(() => {
+                navigate('/user/login', { replace: true })
+            })
+    }, [ navigate ])
 
     const removeSaved = async (item) => {
         try {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { setSessionRole } from '../../utils/session';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const UserRegister = () => {
@@ -29,6 +30,7 @@ const UserRegister = () => {
 
         console.log(response.data);
 
+        setSessionRole('user');
         navigate("/")
 
     };

@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { setSessionRole } from '../../utils/session';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const UserLogin = () => {
@@ -21,6 +22,7 @@ const UserLogin = () => {
 
     console.log(response.data);
 
+    setSessionRole('user');
     navigate("/"); // Redirect to home after login
 
   };

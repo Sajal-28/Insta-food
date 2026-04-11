@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { setSessionRole } from '../../utils/session';
 const API_URL = import.meta.env.VITE_API_URL;
 
 
@@ -30,6 +31,9 @@ const FoodPartnerRegister = () => {
     }, { withCredentials: true })
       .then(response => {
         console.log(response.data);
+        setSessionRole('foodPartner', {
+          foodPartnerId: response.data?.foodPartner?.id
+        });
         navigate("/create-food"); // Redirect to create food page after successful registration
       })
       .catch(error => {

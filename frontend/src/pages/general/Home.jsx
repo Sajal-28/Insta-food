@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import '../../styles/reels.css'
 import ReelFeed from '../../components/ReelFeed'
+import { useNavigate } from 'react-router-dom';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Home = () => {
+
+    const navigate = useNavigate()
+
     const [ videos, setVideos ] = useState([])
     // Autoplay behavior is handled inside ReelFeed
 
@@ -16,8 +20,8 @@ const Home = () => {
 
                 setVideos(response.data.foodItems)
             })
-            .catch(() => { /* noop: optionally handle error */ })
-    }, [])
+            .catch(() => { navigate('/user/login', { replace: true }) })
+    }, [ navigate ])
 
     // Using local refs within ReelFeed; keeping map here for dependency parity if needed
 
